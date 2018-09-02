@@ -19,5 +19,5 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += qtminesweeper.h square.h selector.h cell.h
-SOURCES += main.cpp qtminesweeper.cpp square.cpp selector.cpp cell.cpp
+HEADERS += qtminesweeper.h square.h selector.h cell.h constants.h
+SOURCES += main.cpp qtminesweeper.cpp square.cpp selector.cpp cell.cpp constants.cpp

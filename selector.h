@@ -1,6 +1,6 @@
 /*
  * Copyright Daniel Jones 2018
- * cur.h is part of qtminesweeper, a simple minesweeper clone.
+ * selector.h is part of qtminesweeper, a simple minesweeper clone.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,12 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CUR_H
-#define CUR_H
+#ifndef SELECTOR_H
+#define SELECTR_H
 
 #include "square.h"
 
-class cur : public square
+class selector : public square
 {
 
 	public:

@@ -17,11 +17,18 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
+#include "constants.h"
+
 class square 
 {
 
 	public:
 		explicit square(); /* init function */
+		int getgridx();
+		int getgridy();
+		int getrealx();
+		int getrealy();
+		void movetogridpos(int x, int y);
 
 	private:
 		/*
@@ -34,22 +41,9 @@ class square
 		int gridx;
 		int gridy;
 
-		void setrealx(int x);
-		void setrealy(int y);
-
-		void setgridx(int x);
-		void setgridy(int y);
-
 		void movetorealpos(int x, int y);
 
-		int getrealx();
-		int getrealy();
-
 	protected:
-		int getgridx();
-		int getgridy();
-
-		void movetogridpos(int x, int y);
 };
 
 #endif

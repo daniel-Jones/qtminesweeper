@@ -20,35 +20,6 @@ square::square()
 {
 
 }
-void square::setrealx(int x)
-{
-	realx = x;
-}
-
-void square::setrealy(int y)
-{
-	realy = y;
-}
-
-void square::setgridx(int x)
-{
-	gridx = x;
-}
-
-void square::setgridy(int y)
-{
-	gridy = y;
-}
-
-int square::getrealx()
-{
-	return realx;
-}
-
-int square::getrealy()
-{
-	return realy;
-}
 
 int square::getgridx()
 {
@@ -60,15 +31,27 @@ int square::getgridy()
 	return gridy;
 }
 
+int square::getrealx()
+{
+	return realx;
+}
+
+int square::getrealy()
+{
+	return realy;
+}
 void square::movetorealpos(int x, int y)
 {
-	setrealx(x);
-	setrealy(y);
+	realx = x;
+	realy = y;
 }
 
 void square::movetogridpos(int x, int y)
 {
-	setgridx(x);
-	setgridy(y);
-
+	gridx = x;
+	gridy = y;
+	int rx, ry;
+	rx = x * SQUARESIZE + BORDEROFFSET;
+	ry = y * SQUARESIZE + BORDEROFFSET;
+	movetorealpos(rx, ry);
 }

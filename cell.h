@@ -34,10 +34,10 @@ class cell : public square
 		void flagcheck();
 
 	private:
+		enum flagtype flags;
 		void setflags(int flag);
 
 	protected:
-		enum flagtype flags;
 };
 
 #endif

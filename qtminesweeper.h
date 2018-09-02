@@ -19,8 +19,10 @@
 
 #include <QtGui>
 #include <QWidget>
+#include <QList>
 #include "selector.h"
 #include "cell.h"
+#include "constants.h"
 
 class qtminesweeper : public QWidget
 {
@@ -30,8 +32,20 @@ class qtminesweeper : public QWidget
 		explicit qtminesweeper(); /* init function */
 
 	private:
-		cur curs; /* cursor instance */
+		QPen blackpen;
+		QPen whitepen;
+		QPen redpen;
+		QPen greenpen;
+		QPen bluepen;
 
+		void drawgrid(QPainter *painter);
+		void drawcursor(QPainter *painter);
+		void drawcells(QPainter *painter);
+		void generatecellpos(cell *c);
+
+		selector cursor;
+		QList<cell> cells;
+			
 	protected:
 		void paintEvent(QPaintEvent *event);
 		void keyPressEvent(QKeyEvent *event);
