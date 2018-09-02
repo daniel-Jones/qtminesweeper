@@ -20,7 +20,8 @@
 
 qtminesweeper::qtminesweeper()
 {
-
+	cell cell1(cell::MINE | cell::REVEALED);
+	cell1.flagcheck();
 }
 
 void qtminesweeper::paintEvent(QPaintEvent *event)

@@ -23,10 +23,21 @@ class cell : public square
 {
 
 	public:
+		explicit cell(int flag);
+		enum flagtype
+		{
+			REVEALED = 1 << 0,	/* square is revealed */
+			FLAG = 1 << 1,		/* square is a selected flag */
+			MINE = 1 << 2,		/* square is a mine */
+			NUMBER = 1 << 3		/* square is a number */
+		};
+		void flagcheck();
 
 	private:
+		void setflags(int flag);
 
 	protected:
+		enum flagtype flags;
 };
 
 #endif

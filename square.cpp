@@ -60,7 +60,15 @@ int square::getgridy()
 	return gridy;
 }
 
+void square::movetorealpos(int x, int y)
+{
+	setrealx(x);
+	setrealy(y);
+}
+
 void square::movetogridpos(int x, int y)
 {
+	setgridx(x);
+	setgridy(y);
 
 }

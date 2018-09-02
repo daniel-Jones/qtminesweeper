@@ -15,4 +15,27 @@
  */
 
 #include "cell.h"
+#include <stdio.h>
 
+cell::cell(int flag)
+{
+	setflags(flag);
+}
+
+void cell::setflags(int flag)
+{
+	flags = (enum flagtype)flag;
+}
+
+void cell::flagcheck()
+{
+	puts("cell flags:");
+	if (flags & MINE)
+		puts("mine");
+	if (flags & REVEALED)
+		puts("revealed");
+	if (flags & FLAG)
+		puts("flag");
+	if (flags & NUMBER)
+		puts("number");
+}

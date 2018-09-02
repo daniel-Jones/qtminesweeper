@@ -23,7 +23,6 @@ class cur : public square
 {
 
 	public:
-		int test = 1;
 
 	private:
 
