@@ -29,15 +29,14 @@ qtminesweeper::qtminesweeper()
 	bluepen = QPen(Qt::blue);
 
 	/* create cells */
-	int tmpx, tmpy;
 	for (int c = 0; c < NUMBEROFCELLS; c++)
 	{
-		cell tmp(cell::MINE);
-		generatecellpos(&tmp);
+		int f;
+		f = cell::MINE;
+		cell tmp(f);
 		cells.append(tmp);
-		tmpx++;
-		tmpy++;
 	}
+	generatecellpos();
 
 	cursor.movetogridpos(0, 0);
 }
@@ -81,9 +80,12 @@ void qtminesweeper::drawcells(QPainter *painter)
 {
 	for (int c = 0; c < cells.length(); c++)
 	{
-		painter->drawText(cells[c].getrealx(),
-				cells[c].getrealy()+(SQUARESIZE/2),
-				"B");
+		if (cells[c].getflags() & cell::REVEALED)
+		{
+			painter->drawText(cells[c].getrealx()+(SQUARESIZE/4),
+					cells[c].getrealy()+(SQUARESIZE/2+5),
+					"R");
+		}
 	}
 }
 
@@ -119,6 +121,8 @@ void qtminesweeper::keyPressEvent(QKeyEvent *event)
 						cursor.getgridy());
 			}
 			break;
+		case Qt::Key_Space:
+			break;
 		default:
 			break;
 	}
@@ -126,10 +130,19 @@ void qtminesweeper::keyPressEvent(QKeyEvent *event)
 }
 
 
-void qtminesweeper::generatecellpos(cell *c)
+void qtminesweeper::generatecellpos()
 {
-	int dx, dy;
-	dx = dy = 0;
-	c->movetogridpos(dx, dy);
-	printf("%d\n", c->getrealx());
+	int x, y, z;
+	x = y = 0;
+	int target = 0;
+	for (z = 0; z < GRIDHEIGHT/SQUARESIZE; z++)
+	{
+		for (x = 0; x < GRIDWIDTH/SQUARESIZE; x++)
+		{
+			cells[target].movetogridpos(x, y);
+			target++;
+		}
+		y++;
+		x = 0;
+	}
 }

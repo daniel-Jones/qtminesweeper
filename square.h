@@ -22,6 +22,10 @@
 class square 
 {
 
+	/*
+	 * real* indicates the pixel position
+	 * grid* indicates grid position
+	 */
 	public:
 		explicit square(); /* init function */
 		int getgridx();
@@ -31,10 +35,6 @@ class square
 		void movetogridpos(int x, int y);
 
 	private:
-		/*
-		 * real* indicates the pixel position
-		 * grid* indicates grid position
-		 */
 		int realx;
 		int realy;
 

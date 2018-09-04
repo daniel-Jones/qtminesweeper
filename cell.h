@@ -32,6 +32,7 @@ class cell : public square
 			NUMBER = 1 << 3		/* square is a number */
 		};
 		void flagcheck();
+		int getflags();
 
 	private:
 		enum flagtype flags;

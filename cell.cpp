@@ -39,3 +39,8 @@ void cell::flagcheck()
 	if (flags & NUMBER)
 		puts("number");
 }
+
+int cell::getflags()
+{
+	return flags;
+}

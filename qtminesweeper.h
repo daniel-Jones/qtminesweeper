@@ -41,7 +41,7 @@ class qtminesweeper : public QWidget
 		void drawgrid(QPainter *painter);
 		void drawcursor(QPainter *painter);
 		void drawcells(QPainter *painter);
-		void generatecellpos(cell *c);
+		void generatecellpos();
 
 		selector cursor;
 		QList<cell> cells;
