@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include <QApplication>
+#include <math.h>
 #include "qtminesweeper.h"
 
 qtminesweeper::qtminesweeper()
@@ -29,12 +30,13 @@ qtminesweeper::qtminesweeper()
 	bluepen = QPen(Qt::blue);
 
 	/* create cells */
+	cells.reserve(NUMBEROFCELLS);
 	for (int c = 0; c < NUMBEROFCELLS; c++)
 	{
 		int f;
 		f = cell::MINE;
 		cell tmp(f);
-		cells.append(tmp);
+		cells.push_back(tmp);
 	}
 	generatecellpos();
 
@@ -78,14 +80,16 @@ void qtminesweeper::drawcursor(QPainter *painter)
 
 void qtminesweeper::drawcells(QPainter *painter)
 {
-	for (int c = 0; c < cells.length(); c++)
+	std::vector<int>::size_type c;
+	QString f;
+	for (c = 0; c < cells.size(); c++)
 	{
-		if (cells[c].getflags() & cell::REVEALED)
-		{
-			painter->drawText(cells[c].getrealx()+(SQUARESIZE/4),
-					cells[c].getrealy()+(SQUARESIZE/2+5),
-					"R");
-		}
+		int tf = cells[c].getflags();
+		f = "";
+		if (tf & cell::REVEALED) f = "R";
+		painter->drawText(cells[c].getrealx()+(SQUARESIZE/4),
+				cells[c].getrealy()+(SQUARESIZE/2+5),
+				f);
 	}
 }
 
@@ -122,6 +126,8 @@ void qtminesweeper::keyPressEvent(QKeyEvent *event)
 			}
 			break;
 		case Qt::Key_Space:
+			revealcell(getcellindexfrompos(cursor.getgridx(), cursor.getgridy()));
+
 			break;
 		default:
 			break;
@@ -145,4 +151,22 @@ void qtminesweeper::generatecellpos()
 		y++;
 		x = 0;
 	}
+}
+
+void qtminesweeper::revealcell(int index)
+{
+	cells[index].reveal();
+}
+int qtminesweeper::getcellindexfrompos(int gridx, int gridy)
+{
+	std::vector<int>::size_type c;
+	for (c = 0; c < cells.size(); c++)
+	{
+		if (cells[c].getgridx() == gridx &&
+		    cells[c].getgridy() == gridy)
+		{
+			return c;
+		}
+	}
+	return -1;
 }

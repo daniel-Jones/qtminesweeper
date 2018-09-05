@@ -44,3 +44,8 @@ int cell::getflags()
 {
 	return flags;
 }
+
+void cell::reveal()
+{
+	setflags((int)flags ^ (int)REVEALED);
+}

@@ -33,6 +33,7 @@ class cell : public square
 		};
 		void flagcheck();
 		int getflags();
+		void reveal();
 
 	private:
 		enum flagtype flags;

@@ -1,4 +1,4 @@
-If GRIDOFFSET isn't 10 You can't get to some edges of the grid
+If GRIDOFFSET isn't 10 you (sometimes) can't get to some edges of the grid
 (see qtminesweeper::keyPressEvent(..) in qtminesweeper.cpp)
 
 

@@ -20,6 +20,7 @@
 #include <QtGui>
 #include <QWidget>
 #include <QList>
+#include <vector>
 #include "selector.h"
 #include "cell.h"
 #include "constants.h"
@@ -42,9 +43,11 @@ class qtminesweeper : public QWidget
 		void drawcursor(QPainter *painter);
 		void drawcells(QPainter *painter);
 		void generatecellpos();
+		void revealcell(int index);
+		int getcellindexfrompos(int gridx, int gridy);
 
 		selector cursor;
-		QList<cell> cells;
+		std::vector<cell> cells;
 			
 	protected:
 		void paintEvent(QPaintEvent *event);
