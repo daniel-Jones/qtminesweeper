@@ -34,6 +34,7 @@ class cell : public square
 		void flagcheck();
 		int getflags();
 		void reveal();
+		void makemine();
 
 	private:
 		enum flagtype flags;

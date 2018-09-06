@@ -45,6 +45,9 @@ class qtminesweeper : public QWidget
 		void generatecellpos();
 		void revealcell(int index);
 		int getcellindexfrompos(int gridx, int gridy);
+		cell generatecell();
+		void generatemines();
+		void revealallcells();
 
 		selector cursor;
 		std::vector<cell> cells;

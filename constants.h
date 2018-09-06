@@ -22,5 +22,6 @@ extern const int GRIDWIDTH;
 extern const int GRIDHEIGHT;
 extern const int SQUARESIZE;
 extern const int NUMBEROFCELLS;
+extern const int NUMBEROFMINES;
 
 #endif

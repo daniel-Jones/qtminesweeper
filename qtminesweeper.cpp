@@ -15,13 +15,16 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <QApplication>
-#include <math.h>
 #include "qtminesweeper.h"
 
 qtminesweeper::qtminesweeper()
 {
 	this->setStyleSheet("background-color: black;");
+	/* seed rand */
+	srand(time(NULL));
 	/* setup function */
 	blackpen = QPen(Qt::black);
 	whitepen = QPen(Qt::white);
@@ -33,12 +36,11 @@ qtminesweeper::qtminesweeper()
 	cells.reserve(NUMBEROFCELLS);
 	for (int c = 0; c < NUMBEROFCELLS; c++)
 	{
-		int f;
-		f = cell::MINE;
-		cell tmp(f);
-		cells.push_back(tmp);
+		cells.push_back(generatecell());
 	}
 	generatecellpos();
+	generatemines();
+	revealallcells();
 
 	cursor.movetogridpos(0, 0);
 }
@@ -86,7 +88,7 @@ void qtminesweeper::drawcells(QPainter *painter)
 	{
 		int tf = cells[c].getflags();
 		f = "";
-		if (tf & cell::REVEALED) f = "R";
+		if (tf & cell::REVEALED && tf & cell::MINE) f = "M";
 		painter->drawText(cells[c].getrealx()+(SQUARESIZE/4),
 				cells[c].getrealy()+(SQUARESIZE/2+5),
 				f);
@@ -157,16 +159,41 @@ void qtminesweeper::revealcell(int index)
 {
 	cells[index].reveal();
 }
+
 int qtminesweeper::getcellindexfrompos(int gridx, int gridy)
 {
-	std::vector<int>::size_type c;
-	for (c = 0; c < cells.size(); c++)
+	return gridx + GRIDWIDTH/SQUARESIZE*gridy;
+}
+
+cell qtminesweeper::generatecell()
+{
+	int flags = 0;
+	cell tmp(flags);
+	return tmp;
+}
+
+void qtminesweeper::generatemines()
+{
+	// rand() %NUMBEROFCELLS
+	int c, randcell;
+	while (c < NUMBEROFMINES)
 	{
-		if (cells[c].getgridx() == gridx &&
-		    cells[c].getgridy() == gridy)
+		randcell = rand() %NUMBEROFCELLS;
+		if (cells[randcell].getflags() & cell::MINE)
+			break;
+		else
 		{
-			return c;
+			cells[randcell].makemine();
+			c++;
 		}
 	}
-	return -1;
+}
+
+void qtminesweeper::revealallcells()
+{
+	unsigned int c = 0;
+	for(c = 0; c < cells.size(); c++)
+	{
+		cells[c].reveal();
+	}
 }

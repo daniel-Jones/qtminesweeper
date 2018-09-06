@@ -49,3 +49,8 @@ void cell::reveal()
 {
 	setflags((int)flags ^ (int)REVEALED);
 }
+
+void cell::makemine()
+{
+	setflags((int)flags | (int)MINE);
+}
